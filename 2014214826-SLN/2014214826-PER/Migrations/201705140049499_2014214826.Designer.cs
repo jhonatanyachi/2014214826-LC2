@@ -7,13 +7,13 @@ namespace _2014214826_PER.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Ensambladora : IMigrationMetadata
+    public sealed partial class _2014214826 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Ensambladora));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_2014214826));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705130429214_Ensambladora"; }
+            get { return "201705140049499_2014214826"; }
         }
         
         string IMigrationMetadata.Source

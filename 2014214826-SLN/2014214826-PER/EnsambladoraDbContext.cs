@@ -12,8 +12,6 @@ namespace _2014214826_PER
     public class EnsambladoraDbContext:DbContext
     {
         public DbSet<Asiento> Asientos { get; set; }
-        public DbSet<Automovil> Automoviles { get; set; }
-        public DbSet<Bus> Buses { get; set; }
         public DbSet<Carro> Carros { get; set; }
         public DbSet<Cinturon> Cinturones { get; set; }
         public DbSet<Ensambladora> Ensambladoras { get; set; }

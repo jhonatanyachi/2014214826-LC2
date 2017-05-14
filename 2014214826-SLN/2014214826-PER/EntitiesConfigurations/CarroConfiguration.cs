@@ -24,6 +24,10 @@ namespace _2014214826_PER.EntitiesConfigurations
                .HasMaxLength(10)
                .IsMaxLength();
 
+            Map<Bus>(m => m.Requires("Discriminator").HasValue("Bus"));
+            Map<Automovil>(m => m.Requires("Discriminator").HasValue("Automovil"));
+           
+
             //Relaciones
             HasRequired(c => c.Ensambladora)
                 .WithMany(c => c.Carro)
