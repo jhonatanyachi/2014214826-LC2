@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2014214826_ENT
+namespace _2014214826_ENT.IRepositories
 {
-    class TipoAuto
+    public interface IEnsambladoraRepository:IRepository<Ensambladora>
     {
     }
 }

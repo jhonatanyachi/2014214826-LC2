@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2014214826_PER
+namespace _2014214826_ENT.IRepositories
 {
-    public class Class1
+    public interface IAsientoRepository:IRepository<Asiento>
     {
     }
 }

@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,8 +49,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="EnsambladoraDbContext.cs" />
+    <Compile Include="EntitiesConfigurations\AsientoConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\AutomovilConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\BusConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\CarroConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\CinturonConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\EnsambladoraConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\LlantaConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\ParabrisasConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\PropietarioConfiguration.cs" />
+    <Compile Include="EntitiesConfigurations\VolanteConfiguration.cs" />
+    <Compile Include="Migrations\201705130429214_Ensambladora.cs" />
+    <Compile Include="Migrations\201705130429214_Ensambladora.Designer.cs">
+      <DependentUpon>201705130429214_Ensambladora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AsientoRepository.cs" />
+    <Compile Include="Repositories\AutomovilRepository.cs" />
+    <Compile Include="Repositories\BusRepository.cs" />
+    <Compile Include="Repositories\CarroRepository.cs" />
+    <Compile Include="Repositories\CinturonRepository.cs" />
+    <Compile Include="Repositories\EnsambladoraRepository.cs" />
+    <Compile Include="Repositories\LlantaRepository.cs" />
+    <Compile Include="Repositories\ParabrisasRepository.cs" />
+    <Compile Include="Repositories\PropietarioRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UnityofWork.cs" />
+    <Compile Include="Repositories\VolanteRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2014214826-ENT\2014214826-ENT.csproj">
+      <Project>{998eff4e-8778-4357-b97b-0bd64bfb3f66}</Project>
+      <Name>2014214826-ENT</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705130429214_Ensambladora.resx">
+      <DependentUpon>201705130429214_Ensambladora.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace _2014214826_ENT
 {
-    class Propietario
+    public enum TipoAuto
     {
+        Sedan,PickUp,Coupe,HatckBack,NoDefinido
     }
 }

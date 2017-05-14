@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2014214826_CON
+namespace _2014214826_ENT.IRepositories
 {
-    class Program
+    public interface IParabrisasRepository:IRepository<Parabrisas>
     {
-        static void Main(string[] args)
-        {
-            
-        }
     }
 }

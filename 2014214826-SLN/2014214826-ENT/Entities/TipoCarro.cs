@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace _2014214826_ENT
 {
-    class Llanta
+    public enum TipoCarro
     {
+        Automovil,Bus
     }
 }
