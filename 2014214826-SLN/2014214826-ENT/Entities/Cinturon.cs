@@ -11,7 +11,5 @@ namespace _2014214826_ENT
         public int CinturonId { get; set; }
         public string NumSerie { get; set; }
         public int Metraje { get; set; }
-        public int AsientoId { get; set; }
-        public Asiento Asiento { get; set; }
     }
 }

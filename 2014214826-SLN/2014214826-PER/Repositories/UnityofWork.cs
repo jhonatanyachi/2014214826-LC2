@@ -10,8 +10,6 @@ namespace _2014214826_PER.Repositories
     public class UnityofWork : IUnityofWork
     {
         private readonly EnsambladoraDbContext _Context;
-        private static UnityofWork _Intance;
-        private static readonly object _Lock = new object();
 
         public IAsientoRepository Asientos { get; private set; }
         public IAutomovilRepository Automoviles { get; private set; }
@@ -23,9 +21,16 @@ namespace _2014214826_PER.Repositories
         public IParabrisasRepository Parabrisas { get; private set; }
         public IPropietarioRepository Propietarios { get; private set; }
         public IVolanteRepository Volantes { get; private set; }
+        
         public UnityofWork()
         {
-            _Context = new EnsambladoraDbContext();
+
+        }
+
+        public UnityofWork(EnsambladoraDbContext context)
+        {
+
+            _Context = context;
 
             Asientos = new AsientoRepository(_Context);
             Automoviles = new AutomovilRepository(_Context);
@@ -37,20 +42,7 @@ namespace _2014214826_PER.Repositories
             Parabrisas = new ParabrisasRepository(_Context);
             Propietarios = new PropietarioRepository(_Context);
             Volantes = new VolanteRepository(_Context);
-        }
-        public static UnityofWork Instance
-        {
-            get
-            {
-                lock (_Lock)
-                {
-                    if (_Intance == null)
-                        _Intance = new UnityofWork();
-                }
 
-                return _Intance;
-           }
-            
         }
         public void Dispose()
         {
@@ -59,7 +51,12 @@ namespace _2014214826_PER.Repositories
 
         public int SaveChanges()
         {
-           return _Context.SaveChanges();
+            return _Context.SaveChanges();
+        }
+
+        public void StateModified(object Entity)
+        {
+            _Context.Entry(Entity).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }

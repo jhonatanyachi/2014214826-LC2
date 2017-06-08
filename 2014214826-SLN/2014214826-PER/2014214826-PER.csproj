@@ -32,11 +32,9 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,8 +49,6 @@
   <ItemGroup>
     <Compile Include="EnsambladoraDbContext.cs" />
     <Compile Include="EntitiesConfigurations\AsientoConfiguration.cs" />
-    <Compile Include="EntitiesConfigurations\AutomovilConfiguration.cs" />
-    <Compile Include="EntitiesConfigurations\BusConfiguration.cs" />
     <Compile Include="EntitiesConfigurations\CarroConfiguration.cs" />
     <Compile Include="EntitiesConfigurations\CinturonConfiguration.cs" />
     <Compile Include="EntitiesConfigurations\EnsambladoraConfiguration.cs" />
@@ -60,9 +56,13 @@
     <Compile Include="EntitiesConfigurations\ParabrisasConfiguration.cs" />
     <Compile Include="EntitiesConfigurations\PropietarioConfiguration.cs" />
     <Compile Include="EntitiesConfigurations\VolanteConfiguration.cs" />
-    <Compile Include="Migrations\201705140049499_2014214826.cs" />
-    <Compile Include="Migrations\201705140049499_2014214826.Designer.cs">
-      <DependentUpon>201705140049499_2014214826.cs</DependentUpon>
+    <Compile Include="Migrations\201706080658165_InitialModel.cs" />
+    <Compile Include="Migrations\201706080658165_InitialModel.Designer.cs">
+      <DependentUpon>201706080658165_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706080702290_InitialModel2.cs" />
+    <Compile Include="Migrations\201706080702290_InitialModel2.Designer.cs">
+      <DependentUpon>201706080702290_InitialModel2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,8 +90,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705140049499_2014214826.resx">
-      <DependentUpon>201705140049499_2014214826.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706080658165_InitialModel.resx">
+      <DependentUpon>201706080658165_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706080702290_InitialModel2.resx">
+      <DependentUpon>201706080702290_InitialModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

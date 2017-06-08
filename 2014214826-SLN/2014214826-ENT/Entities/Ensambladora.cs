@@ -9,6 +9,7 @@ namespace _2014214826_ENT
     public class Ensambladora
     {
         public int EnsambladoraId { get; set; }
+        public string _Ensambladora { get; set; }
         public TipoCarro TipoCarro { get; set; }
         public List<Carro> Carro { get; set; }
         public Ensambladora()

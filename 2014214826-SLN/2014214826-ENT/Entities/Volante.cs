@@ -10,8 +10,6 @@ namespace _2014214826_ENT
     {
         public int VolanteId { get; set; }
         public string NumSerie { get; set; }
-        public Carro Carro { get; set; }
-        public int CarroId { get; set; }
 
     }
 }

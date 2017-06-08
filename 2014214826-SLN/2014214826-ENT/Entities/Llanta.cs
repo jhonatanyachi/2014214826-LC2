@@ -10,7 +10,11 @@ namespace _2014214826_ENT
     {
         public int LlantaId { get; set; }
         public string NumSerie { get; set; }
-        public int CarroId { get; set; }
-        public Carro Carro { get; set; }
+        public List<Carro> Carros { get; set;}
+        //public Carro Carro { get; set; }
+        public Llanta()
+        {
+            Carros = new List<Carro>();
+        }
     }
 }

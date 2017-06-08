@@ -1,6 +1,7 @@
 ﻿using _2014214826_ENT;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,9 @@ namespace _2014214826_PER.EntitiesConfigurations
 
             Map<Bus>(m => m.Requires("Discriminator").HasValue("Bus"));
             Map<Automovil>(m => m.Requires("Discriminator").HasValue("Automovil"));
-           
+
+            Property(c => c.CarroId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             //Relaciones
             HasRequired(c => c.Ensambladora)

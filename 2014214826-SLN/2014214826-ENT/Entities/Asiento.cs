@@ -12,9 +12,12 @@ namespace _2014214826_ENT
         public string NumSerie { get; set; }
         public int CinturonId { get; set; }
         public Cinturon Cinturon { get; set; }
-        public int CarroId { get; set; }
-        public Carro Carro { get; set; }
-
+        public List<Carro> Carros { get; set; }
+        //public Carro Carro { get; set; }
+        public Asiento()
+        {
+            Carros = new List<Carro>();
+        }
 
     }
 }

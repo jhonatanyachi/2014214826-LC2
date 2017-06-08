@@ -1,0 +1,40 @@
+﻿@model IEnumerable<_2014214826_ENT.Ensambladora>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model._Ensambladora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoCarro)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item._Ensambladora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoCarro)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EnsambladoraId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EnsambladoraId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EnsambladoraId })
+        </td>
+    </tr>
+}
+
+</table>

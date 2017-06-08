@@ -1,6 +1,7 @@
 ﻿using _2014214826_ENT;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,10 @@ namespace _2014214826_PER.EntitiesConfigurations
 
             HasKey(c => c.LlantaId);
             //Propiedades 
+            Property(c => c.LlantaId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(c => c.NumSerie)
                 .IsRequired();
-
-
-            //Relaciones
-            HasRequired(c => c.Carro)
-                .WithMany(c => c.Llanta);
 
         }
     }

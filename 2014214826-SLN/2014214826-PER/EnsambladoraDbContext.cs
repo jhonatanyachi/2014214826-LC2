@@ -20,12 +20,15 @@ namespace _2014214826_PER
         public DbSet<Propietario> Propietarios { get; set; }
         public DbSet<Volante> Volantes { get; set; }
 
+        public EnsambladoraDbContext() : base("Ensambladora")
+        {
+
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new EnsambladoraConfiguration());
             modelBuilder.Configurations.Add(new AsientoConfiguration());
-            modelBuilder.Configurations.Add(new AutomovilConfiguration());
-            modelBuilder.Configurations.Add(new BusConfiguration());
             modelBuilder.Configurations.Add(new CinturonConfiguration());
             modelBuilder.Configurations.Add(new LlantaConfiguration());
             modelBuilder.Configurations.Add(new ParabrisasConfiguration());
@@ -34,5 +37,7 @@ namespace _2014214826_PER
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<_2014214826_ENT.Bus> Carroes { get; set; }
     }
 }

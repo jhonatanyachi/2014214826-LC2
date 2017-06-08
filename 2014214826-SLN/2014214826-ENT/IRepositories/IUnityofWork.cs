@@ -20,6 +20,6 @@ namespace _2014214826_ENT.IRepositories
         IVolanteRepository Volantes { get; }
 
         int SaveChanges();
-
+        void StateModified(object entity);
     }
 }

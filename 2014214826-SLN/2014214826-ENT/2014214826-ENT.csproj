@@ -62,9 +62,9 @@
     <Compile Include="IRepositories\IUnityofWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Propietario.cs" />
-    <Compile Include="Entities\TipoAuto.cs" />
-    <Compile Include="Entities\TipoBus.cs" />
-    <Compile Include="Entities\TipoCarro.cs" />
+    <Compile Include="Enumerados\TipoAuto.cs" />
+    <Compile Include="Enumerados\TipoBus.cs" />
+    <Compile Include="Enumerados\TipoCarro.cs" />
     <Compile Include="Entities\Volante.cs" />
   </ItemGroup>
   <ItemGroup />
