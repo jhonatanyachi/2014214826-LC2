@@ -10,7 +10,6 @@ namespace _2014214826_ENT
     {
         public TipoAuto TipoAuto { get; set; }
 
-
         public Automovil():base()
         {
 

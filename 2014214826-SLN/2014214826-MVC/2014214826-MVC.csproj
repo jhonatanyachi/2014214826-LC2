@@ -209,11 +209,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Cinturones\Create.cshtml" />
-    <Content Include="Views\Cinturones\Delete.cshtml" />
-    <Content Include="Views\Cinturones\Details.cshtml" />
-    <Content Include="Views\Cinturones\Edit.cshtml" />
-    <Content Include="Views\Cinturones\Index.cshtml" />
     <Content Include="Views\Volantes\Create.cshtml" />
     <Content Include="Views\Volantes\Delete.cshtml" />
     <Content Include="Views\Volantes\Details.cshtml" />
@@ -239,6 +234,16 @@
     <Content Include="Views\Llantas\Details.cshtml" />
     <Content Include="Views\Llantas\Edit.cshtml" />
     <Content Include="Views\Llantas\Index.cshtml" />
+    <Content Include="Views\Cinturones\Create.cshtml" />
+    <Content Include="Views\Cinturones\Delete.cshtml" />
+    <Content Include="Views\Cinturones\Details.cshtml" />
+    <Content Include="Views\Cinturones\Edit.cshtml" />
+    <Content Include="Views\Cinturones\Index.cshtml" />
+    <Content Include="Views\Asientos\Create.cshtml" />
+    <Content Include="Views\Asientos\Delete.cshtml" />
+    <Content Include="Views\Asientos\Details.cshtml" />
+    <Content Include="Views\Asientos\Edit.cshtml" />
+    <Content Include="Views\Asientos\Index.cshtml" />
     <Content Include="Views\Buses\Create.cshtml" />
     <Content Include="Views\Buses\Delete.cshtml" />
     <Content Include="Views\Buses\Details.cshtml" />
@@ -249,11 +254,6 @@
     <Content Include="Views\Automoviles\Details.cshtml" />
     <Content Include="Views\Automoviles\Edit.cshtml" />
     <Content Include="Views\Automoviles\Index.cshtml" />
-    <Content Include="Views\Asientos\Create.cshtml" />
-    <Content Include="Views\Asientos\Delete.cshtml" />
-    <Content Include="Views\Asientos\Details.cshtml" />
-    <Content Include="Views\Asientos\Edit.cshtml" />
-    <Content Include="Views\Asientos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

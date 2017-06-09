@@ -8,17 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using _2014214826_ENT;
 using _2014214826_PER;
+using _2014214826_ENT.IRepositories;
 
 namespace _2014214826_MVC.Controllers
 {
     public class AsientosController : Controller
     {
-        private EnsambladoraDbContext db = new EnsambladoraDbContext();
+          
+        //private EnsambladoraDbContext db = new EnsambladoraDbContext();
+        private readonly IUnityofWork _UnityOfWork;
+        public AsientosController(IUnityofWork unityofwork)
+        {
+            _UnityOfWork = unityofwork;
+        }
+        public AsientosController()
+        {
 
+        }
         // GET: Asientos
         public ActionResult Index()
         {
-            var asientos = db.Asientos.Include(a => a.Cinturon);
+            var asientos = _UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon);
             return View(asientos.ToList());
         }
 
@@ -29,7 +39,7 @@ namespace _2014214826_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asiento asiento = db.Asientos.Find(id);
+            Asiento asiento = _UnityOfWork.Asientos.Get(id);
             if (asiento == null)
             {
                 return HttpNotFound();
@@ -40,7 +50,7 @@ namespace _2014214826_MVC.Controllers
         // GET: Asientos/Create
         public ActionResult Create()
         {
-            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerie");
+            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon");
             return View();
         }
 
@@ -49,16 +59,16 @@ namespace _2014214826_MVC.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AsientoId,NumSerie,CinturonId")] Asiento asiento)
+        public ActionResult Create([Bind(Include = "AsientoId,NumSerieAsiento,CinturonId")] Asiento asiento)
         {
             if (ModelState.IsValid)
             {
-                db.Asientos.Add(asiento);
-                db.SaveChanges();
+                _UnityOfWork.Asientos.Add(asiento);
+                _UnityOfWork.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerie", asiento.CinturonId);
+            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon", asiento.CinturonId);
             return View(asiento);
         }
 
@@ -69,12 +79,12 @@ namespace _2014214826_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asiento asiento = db.Asientos.Find(id);
+            Asiento asiento = _UnityOfWork.Asientos.Get(id);
             if (asiento == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerie", asiento.CinturonId);
+            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon", asiento.CinturonId);
             return View(asiento);
         }
 
@@ -83,15 +93,15 @@ namespace _2014214826_MVC.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AsientoId,NumSerie,CinturonId")] Asiento asiento)
+        public ActionResult Edit([Bind(Include = "AsientoId,NumSerieAsiento,CinturonId")] Asiento asiento)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(asiento).State = EntityState.Modified;
-                db.SaveChanges();
+                _UnityOfWork.StateModified(asiento);
+                _UnityOfWork.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerie", asiento.CinturonId);
+            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon", asiento.CinturonId);
             return View(asiento);
         }
 
@@ -102,7 +112,7 @@ namespace _2014214826_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asiento asiento = db.Asientos.Find(id);
+            Asiento asiento = _UnityOfWork.Asientos.Get(id);
             if (asiento == null)
             {
                 return HttpNotFound();
@@ -115,9 +125,9 @@ namespace _2014214826_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Asiento asiento = db.Asientos.Find(id);
-            db.Asientos.Remove(asiento);
-            db.SaveChanges();
+            Asiento asiento = _UnityOfWork.Asientos.Get(id);
+            _UnityOfWork.Asientos.Delete(asiento);
+            _UnityOfWork.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +135,7 @@ namespace _2014214826_MVC.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _UnityOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

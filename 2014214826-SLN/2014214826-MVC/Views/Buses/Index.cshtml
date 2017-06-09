@@ -5,18 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Buses</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Bus", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Asiento.NumSerieAsiento)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Ensambladora._Ensambladora)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Llanta.NumSerie)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Parabrisas.NumSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Propietario.DNI)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Volante.NumSerie)
@@ -39,10 +48,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Asiento.NumSerieAsiento)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Ensambladora._Ensambladora)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Llanta.NumSerie)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Parabrisas.NumSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Propietario.DNI)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Volante.NumSerie)

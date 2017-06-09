@@ -9,14 +9,14 @@ namespace _2014214826_ENT
     public class Asiento
     {
         public int AsientoId { get; set; }
-        public string NumSerie { get; set; }
+        public string NumSerieAsiento { get; set; }
         public int CinturonId { get; set; }
-        public Cinturon Cinturon { get; set; }
-        public List<Carro> Carros { get; set; }
+        public virtual Cinturon Cinturon { get; set; }
+        //public List<Carro> Carros { get; set; }
         //public Carro Carro { get; set; }
         public Asiento()
         {
-            Carros = new List<Carro>();
+            //Carros = new List<Carro>();
         }
 
     }

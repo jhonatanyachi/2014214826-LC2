@@ -9,7 +9,7 @@ namespace _2014214826_ENT
     public class Cinturon
     {
         public int CinturonId { get; set; }
-        public string NumSerie { get; set; }
+        public string NumSerieCinturon { get; set; }
         public int Metraje { get; set; }
     }
 }

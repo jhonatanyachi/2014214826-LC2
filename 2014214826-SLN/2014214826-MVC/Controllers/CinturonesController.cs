@@ -56,7 +56,7 @@ namespace _2014214826_MVC.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CinturonId,NumSerie,Metraje")] Cinturon cinturon)
+        public ActionResult Create([Bind(Include = "CinturonId,NumSerieCinturon,Metraje")] Cinturon cinturon)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace _2014214826_MVC.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CinturonId,NumSerie,Metraje")] Cinturon cinturon)
+        public ActionResult Edit([Bind(Include = "CinturonId,NumSerieCinturon,Metraje")] Cinturon cinturon)
         {
             if (ModelState.IsValid)
             {

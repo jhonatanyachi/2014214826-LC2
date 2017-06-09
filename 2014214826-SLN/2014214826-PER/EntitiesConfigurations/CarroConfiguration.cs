@@ -32,9 +32,9 @@ namespace _2014214826_PER.EntitiesConfigurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             //Relaciones
-            HasRequired(c => c.Ensambladora)
-                .WithMany(c => c.Carro)
-                .HasForeignKey(c => c.Ensambladora);
+            //HasRequired(c => c.Ensambladora)
+            //    .WithMany(c => c.Carro)
+            //    .HasForeignKey(c => c.Ensambladora);
         }
     }
 }

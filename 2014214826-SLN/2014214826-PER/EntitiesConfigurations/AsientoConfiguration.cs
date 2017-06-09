@@ -18,7 +18,7 @@ namespace _2014214826_PER.EntitiesConfigurations
 
             HasKey(c => c.AsientoId);
             //Propiedades
-            Property(c => c.NumSerie)
+            Property(c => c.NumSerieAsiento)
                 .IsRequired()
                 .HasMaxLength(10);
             Property(c => c.AsientoId)

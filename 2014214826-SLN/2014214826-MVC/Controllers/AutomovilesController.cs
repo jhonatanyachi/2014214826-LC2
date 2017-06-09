@@ -8,27 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using _2014214826_ENT;
 using _2014214826_PER;
-using _2014214826_ENT.IRepositories;
 
 namespace _2014214826_MVC.Controllers
 {
     public class AutomovilesController : Controller
     {
-        //private EnsambladoraDbContext db = new EnsambladoraDbContext();
-        private readonly IUnityofWork _UnityOfWork;
-        public AutomovilesController(IUnityofWork unityofwork)
-        {
-            _UnityOfWork = unityofwork;
-        }
-        public AutomovilesController()
-        {
+        private EnsambladoraDbContext db = new EnsambladoraDbContext();
 
-        }
         // GET: Automoviles
         public ActionResult Index()
         {
-            var carroes = _UnityOfWork.Carros.GetEntity().Include(a => a.Ensambladora).Include(a => a.Parabrisas).Include(a => a.Volante);
-            return View(carroes.ToList());
+            var carros = db._Carroes.Include(a => a.Asiento).Include(a => a.Ensambladora).Include(a => a.Llanta).Include(a => a.Parabrisas).Include(a => a.Propietario).Include(a => a.Volante);
+            return View(carros.ToList());
         }
 
         // GET: Automoviles/Details/5
@@ -38,7 +29,7 @@ namespace _2014214826_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Automovil automovil = _UnityOfWork.Automoviles.Get(id);
+            Carro automovil = db.Carros.Find(id);
             if (automovil == null)
             {
                 return HttpNotFound();
@@ -49,9 +40,12 @@ namespace _2014214826_MVC.Controllers
         // GET: Automoviles/Create
         public ActionResult Create()
         {
-            ViewBag.EnsambladoraId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Ensambladora), "EnsambladoraId", "_Ensambladora");
-            ViewBag.ParabrisasId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Parabrisas), "ParabrisasId", "NumSerie");
-            ViewBag.VolanteId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Volante), "VolanteId", "NumSerie");
+            ViewBag.AsientoId = new SelectList(db.Asientos, "AsientoId", "NumSerieAsiento");
+            ViewBag.EnsambladoraId = new SelectList(db.Ensambladoras, "EnsambladoraId", "_Ensambladora");
+            ViewBag.LlantaId = new SelectList(db.Llantas, "LlantaId", "NumSerie");
+            ViewBag.ParabrisasId = new SelectList(db.Parabrisas, "ParabrisasId", "NumSerie");
+            ViewBag.PropietarioId = new SelectList(db.Propietarios, "PropietarioId", "DNI");
+            ViewBag.VolanteId = new SelectList(db.Volantes, "VolanteId", "NumSerie");
             return View();
         }
 
@@ -60,18 +54,21 @@ namespace _2014214826_MVC.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CarroId,NumSerieMotor,NumSerieChasis,ParabrisasId,VolanteId,TipoCarro,EnsambladoraId,TipoAuto")] Automovil automovil)
+        public ActionResult Create([Bind(Include = "CarroId,NumSerieMotor,NumSerieChasis,PropietarioId,ParabrisasId,VolanteId,TipoCarro,AsientoId,LlantaId,EnsambladoraId,TipoAuto")] Automovil automovil)
         {
             if (ModelState.IsValid)
             {
-                _UnityOfWork.Carros.Add(automovil);
-                _UnityOfWork.SaveChanges();
+                db.Carros.Add(automovil);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EnsambladoraId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Ensambladora), "EnsambladoraId", "_Ensambladora", automovil.EnsambladoraId);
-            ViewBag.ParabrisasId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Parabrisas), "ParabrisasId", "NumSerie", automovil.ParabrisasId);
-            ViewBag.VolanteId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Volante), "VolanteId", "NumSerie", automovil.VolanteId);
+            ViewBag.AsientoId = new SelectList(db.Asientos, "AsientoId", "NumSerieAsiento", automovil.AsientoId);
+            ViewBag.EnsambladoraId = new SelectList(db.Ensambladoras, "EnsambladoraId", "_Ensambladora", automovil.EnsambladoraId);
+            ViewBag.LlantaId = new SelectList(db.Llantas, "LlantaId", "NumSerie", automovil.LlantaId);
+            ViewBag.ParabrisasId = new SelectList(db.Parabrisas, "ParabrisasId", "NumSerie", automovil.ParabrisasId);
+            ViewBag.PropietarioId = new SelectList(db.Propietarios, "PropietarioId", "DNI", automovil.PropietarioId);
+            ViewBag.VolanteId = new SelectList(db.Volantes, "VolanteId", "NumSerie", automovil.VolanteId);
             return View(automovil);
         }
 
@@ -82,14 +79,17 @@ namespace _2014214826_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Automovil automovil = _UnityOfWork.Automoviles.Get(id);
+            Carro automovil = db.Carros.Find(id);
             if (automovil == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EnsambladoraId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Ensambladora), "EnsambladoraId", "_Ensambladora", automovil.EnsambladoraId);
-            ViewBag.ParabrisasId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Parabrisas), "ParabrisasId", "NumSerie", automovil.ParabrisasId);
-            ViewBag.VolanteId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Volante), "VolanteId", "NumSerie", automovil.VolanteId);
+            ViewBag.AsientoId = new SelectList(db.Asientos, "AsientoId", "NumSerieAsiento", automovil.AsientoId);
+            ViewBag.EnsambladoraId = new SelectList(db.Ensambladoras, "EnsambladoraId", "_Ensambladora", automovil.EnsambladoraId);
+            ViewBag.LlantaId = new SelectList(db.Llantas, "LlantaId", "NumSerie", automovil.LlantaId);
+            ViewBag.ParabrisasId = new SelectList(db.Parabrisas, "ParabrisasId", "NumSerie", automovil.ParabrisasId);
+            ViewBag.PropietarioId = new SelectList(db.Propietarios, "PropietarioId", "DNI", automovil.PropietarioId);
+            ViewBag.VolanteId = new SelectList(db.Volantes, "VolanteId", "NumSerie", automovil.VolanteId);
             return View(automovil);
         }
 
@@ -98,17 +98,20 @@ namespace _2014214826_MVC.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CarroId,NumSerieMotor,NumSerieChasis,ParabrisasId,VolanteId,TipoCarro,EnsambladoraId,TipoAuto")] Automovil automovil)
+        public ActionResult Edit([Bind(Include = "CarroId,NumSerieMotor,NumSerieChasis,PropietarioId,ParabrisasId,VolanteId,TipoCarro,AsientoId,LlantaId,EnsambladoraId,TipoAuto")] Automovil automovil)
         {
             if (ModelState.IsValid)
             {
-                _UnityOfWork.StateModified(automovil);
-                _UnityOfWork.SaveChanges();
+                db.Entry(automovil).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EnsambladoraId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Ensambladora), "EnsambladoraId", "_Ensambladora", automovil.EnsambladoraId);
-            ViewBag.ParabrisasId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Parabrisas), "ParabrisasId", "NumSerie", automovil.ParabrisasId);
-            ViewBag.VolanteId = new SelectList(_UnityOfWork.Carros.GetEntity().Include(a => a.Volante), "VolanteId", "NumSerie", automovil.VolanteId);
+            ViewBag.AsientoId = new SelectList(db.Asientos, "AsientoId", "NumSerieAsiento", automovil.AsientoId);
+            ViewBag.EnsambladoraId = new SelectList(db.Ensambladoras, "EnsambladoraId", "_Ensambladora", automovil.EnsambladoraId);
+            ViewBag.LlantaId = new SelectList(db.Llantas, "LlantaId", "NumSerie", automovil.LlantaId);
+            ViewBag.ParabrisasId = new SelectList(db.Parabrisas, "ParabrisasId", "NumSerie", automovil.ParabrisasId);
+            ViewBag.PropietarioId = new SelectList(db.Propietarios, "PropietarioId", "DNI", automovil.PropietarioId);
+            ViewBag.VolanteId = new SelectList(db.Volantes, "VolanteId", "NumSerie", automovil.VolanteId);
             return View(automovil);
         }
 
@@ -119,7 +122,7 @@ namespace _2014214826_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Automovil automovil = _UnityOfWork.Automoviles.Get(id);
+            Carro automovil = db.Carros.Find(id);
             if (automovil == null)
             {
                 return HttpNotFound();
@@ -132,9 +135,9 @@ namespace _2014214826_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Automovil automovil = _UnityOfWork.Automoviles.Get(id);
-            _UnityOfWork.Carros.Delete(automovil);
-            _UnityOfWork.SaveChanges();
+            Carro automovil = db.Carros.Find(id);
+            db.Carros.Remove(automovil);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -142,7 +145,7 @@ namespace _2014214826_MVC.Controllers
         {
             if (disposing)
             {
-                _UnityOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

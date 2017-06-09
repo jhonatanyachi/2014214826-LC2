@@ -19,6 +19,8 @@ namespace _2014214826_PER
         public DbSet<Parabrisas> Parabrisas { get; set; }
         public DbSet<Propietario> Propietarios { get; set; }
         public DbSet<Volante> Volantes { get; set; }
+        public System.Data.Entity.DbSet<_2014214826_ENT.Bus> Carroes { get; set; }
+        public System.Data.Entity.DbSet<_2014214826_ENT.Automovil> _Carroes { get; set; }
 
         public EnsambladoraDbContext() : base("Ensambladora")
         {
@@ -34,10 +36,11 @@ namespace _2014214826_PER
             modelBuilder.Configurations.Add(new ParabrisasConfiguration());
             modelBuilder.Configurations.Add(new PropietarioConfiguration());
             modelBuilder.Configurations.Add(new VolanteConfiguration());
+            modelBuilder.Configurations.Add(new CarroConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public System.Data.Entity.DbSet<_2014214826_ENT.Bus> Carroes { get; set; }
+        
     }
 }
