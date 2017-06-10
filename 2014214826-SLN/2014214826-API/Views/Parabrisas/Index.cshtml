@@ -1,0 +1,86 @@
+﻿@model IEnumerable<_2014214826_ENT.Parabrisas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Parabrisas</h2>
+
+<p>
+    @Html.ActionLink("Nueva Parabrisa", "Create")
+</p>
+<table id="tbl_Parabrisas" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Numero Serie Parabrisa</th>
+            <th>Editar</th>
+            <th>Detalles</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSerie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSerie)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ParabrisasId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ParabrisasId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ParabrisasId })
+        </td>
+    </tr>
+}*@
+
+</table>
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+               var table = $("#tbl_Parabrisas")
+                    .DataTable({
+                ajax: {
+                    url: "/api/Parabrisas",
+                    dataSrc:""
+                },
+                columns: [
+                    { data: "NumSerie" },
+
+                    {
+                        data: "ParabrisasId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Parabrisas/Edit/" + data + "'>Actualizar</a>";
+                        }
+                    },
+                    {
+                        data: "ParabrisasId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Parabrisas/details/" + data + "'>Detalles</a>";
+                        }
+                    },
+                    {
+                        data: "ParabrisasId",
+                        render: function (data) {
+                            return "<a class='btn btn-primary' href='/Parabrisas/Delete/" + data + "'>Borrar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+        });
+    </script>
+}
+
+

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<_2014214826_ENT.Llanta>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Llantas</h2>
+
+<p>
+    @Html.ActionLink("Nueva Llanta", "Create")
+</p>
+<table id="tbl_Llantas" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Numero Serie Llanta</th>
+            <th>Editar</th>
+            <th>Detalles</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSerie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSerie)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LlantaId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LlantaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LlantaId })
+        </td>
+    </tr>
+}*@
+
+</table>
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+               var table = $("#tbl_Llantas")
+                    .DataTable({
+                ajax: {
+                    url: "/api/Llantas",
+                    dataSrc:""
+                },
+                columns: [
+                    { data: "NumSerie" },
+
+                    {
+                        data: "LlantaId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Llantas/Edit/" + data + "'>Actualizar</a>";
+                        }
+                    },
+                    {
+                        data: "LlantaId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Llantas/details/" + data + "'>Detalles</a>";
+                        }
+                    },
+                    {
+                        data: "LlantaId",
+                        render: function (data) {
+                            return "<a class='btn btn-primary' href='/Llantas/Delete/" + data + "'>Borrar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+        });
+    </script>
+}

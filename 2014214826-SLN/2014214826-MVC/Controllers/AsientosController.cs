@@ -14,32 +14,24 @@ namespace _2014214826_MVC.Controllers
 {
     public class AsientosController : Controller
     {
-          
-        //private EnsambladoraDbContext db = new EnsambladoraDbContext();
-        private readonly IUnityofWork _UnityOfWork;
-        public AsientosController(IUnityofWork unityofwork)
-        {
-            _UnityOfWork = unityofwork;
-        }
-        public AsientosController()
-        {
 
-        }
-        // GET: Asientos
+        private EnsambladoraDbContext db = new EnsambladoraDbContext();
+
+        // GET: HelpPage/Asientos
         public ActionResult Index()
         {
-            var asientos = _UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon);
+            var asientos = db.Asientos.Include(a => a.Cinturon);
             return View(asientos.ToList());
         }
 
-        // GET: Asientos/Details/5
+        // GET: HelpPage/Asientos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asiento asiento = _UnityOfWork.Asientos.Get(id);
+            Asiento asiento = db.Asientos.Find(id);
             if (asiento == null)
             {
                 return HttpNotFound();
@@ -47,14 +39,14 @@ namespace _2014214826_MVC.Controllers
             return View(asiento);
         }
 
-        // GET: Asientos/Create
+        // GET: HelpPage/Asientos/Create
         public ActionResult Create()
         {
-            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon");
+            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerieCinturon");
             return View();
         }
 
-        // POST: Asientos/Create
+        // POST: HelpPage/Asientos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -63,32 +55,32 @@ namespace _2014214826_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _UnityOfWork.Asientos.Add(asiento);
-                _UnityOfWork.SaveChanges();
+                db.Asientos.Add(asiento);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon", asiento.CinturonId);
+            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerieCinturon", asiento.CinturonId);
             return View(asiento);
         }
 
-        // GET: Asientos/Edit/5
+        // GET: HelpPage/Asientos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asiento asiento = _UnityOfWork.Asientos.Get(id);
+            Asiento asiento = db.Asientos.Find(id);
             if (asiento == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon", asiento.CinturonId);
+            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerieCinturon", asiento.CinturonId);
             return View(asiento);
         }
 
-        // POST: Asientos/Edit/5
+        // POST: HelpPage/Asientos/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -97,22 +89,22 @@ namespace _2014214826_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _UnityOfWork.StateModified(asiento);
-                _UnityOfWork.SaveChanges();
+                db.Entry(asiento).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CinturonId = new SelectList(_UnityOfWork.Asientos.GetEntity().Include(a => a.Cinturon), "CinturonId", "NumSerieCinturon", asiento.CinturonId);
+            ViewBag.CinturonId = new SelectList(db.Cinturones, "CinturonId", "NumSerieCinturon", asiento.CinturonId);
             return View(asiento);
         }
 
-        // GET: Asientos/Delete/5
+        // GET: HelpPage/Asientos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Asiento asiento = _UnityOfWork.Asientos.Get(id);
+            Asiento asiento = db.Asientos.Find(id);
             if (asiento == null)
             {
                 return HttpNotFound();
@@ -120,14 +112,14 @@ namespace _2014214826_MVC.Controllers
             return View(asiento);
         }
 
-        // POST: Asientos/Delete/5
+        // POST: HelpPage/Asientos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Asiento asiento = _UnityOfWork.Asientos.Get(id);
-            _UnityOfWork.Asientos.Delete(asiento);
-            _UnityOfWork.SaveChanges();
+            Asiento asiento = db.Asientos.Find(id);
+            db.Asientos.Remove(asiento);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -135,7 +127,7 @@ namespace _2014214826_MVC.Controllers
         {
             if (disposing)
             {
-                _UnityOfWork.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

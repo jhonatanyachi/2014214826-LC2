@@ -1,0 +1,95 @@
+﻿@model IEnumerable<_2014214826_ENT.Asiento>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Asientos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Asiento", "Create")
+</p>
+<table id="tbl_Asientos" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Numero Serie Cinturon</th>
+            <th>Numero Serie Asiento</th>
+            <th>Editar</th>
+            <th>Detalles</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cinturon.NumSerieCinturon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSerieAsiento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cinturon.NumSerieCinturon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSerieAsiento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AsientoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AsientoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AsientoId })
+        </td>
+    </tr>
+}*@
+
+</table>
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+               var table = $("#tbl_Asientos")
+                    .DataTable({
+                ajax: {
+                    url: "/api/Asientos",
+                    dataSrc:""
+                },
+                columns: [
+                    { data: "Cinturon.NumSerieCinturon" },
+                    { data: "NumSerieAsiento" },
+
+                    {
+                        data: "AsientoId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Asientos/Edit/" + data + "'>Actualizar</a>";
+                        }
+                    },
+                    {
+                        data: "AsientoId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Asientos/details/" + data + "'>Detalles</a>";
+                        }
+                    },
+                    {
+                        data: "AsientoId",
+                        render: function (data) {
+                            return "<a class='btn btn-primary' href='/Asientos/Delete/" + data + "'>Borrar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+        });
+    </script>
+}
+
+

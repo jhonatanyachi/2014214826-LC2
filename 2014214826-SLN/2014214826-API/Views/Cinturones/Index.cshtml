@@ -1,0 +1,93 @@
+﻿@model IEnumerable<_2014214826_ENT.Cinturon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cinturones</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Cinturon", "Create")
+</p>
+<table id="tbl_Cinturones" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Numero Serie</th>
+            <th>Metraje</th>
+            <th>Editar</th>
+            <th>Detalles</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSerieCinturon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Metraje)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSerieCinturon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Metraje)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CinturonId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CinturonId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CinturonId })
+        </td>
+    </tr>
+}*@
+
+</table>
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+               var table = $("#tbl_Cinturones")
+                    .DataTable({
+                ajax: {
+                    url: "/api/Cinturones",
+                    dataSrc:""
+                },
+                columns: [
+                    { data: "NumSerieCinturon" },
+                    { data: "Metraje" },
+                    
+
+                    {
+                        data: "CinturonId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Cinturones/Edit/" + data + "'>Actualizar</a>";
+                        }
+                    },
+                    {
+                        data: "CinturonId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Cinturones/details/" + data + "'>Detalles</a>";
+                        }
+                    },
+                    {
+                        data: "CinturonId",
+                        render: function (data) {
+                            return "<a class='btn btn-primary' href='/Cinturones/Delete/" + data + "'>Borrar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+        });
+    </script>
+}

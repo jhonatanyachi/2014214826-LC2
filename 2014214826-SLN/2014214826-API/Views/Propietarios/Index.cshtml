@@ -1,0 +1,110 @@
+﻿@model IEnumerable<_2014214826_ENT.Propietario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Propietarios</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Propietario", "Create")
+</p>
+<table id="tbl_Propietarios" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>DNI</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Licencia de Conducir</th>
+            <th>Editar</th>
+            <th>Detalles</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LicenciaConducir)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LicenciaConducir)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PropietarioId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PropietarioId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PropietarioId })
+        </td>
+    </tr>
+}*@
+
+</table>
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+               var table = $("#tbl_Propietarios")
+                    .DataTable({
+                ajax: {
+                    url: "/api/Propietarios",
+                    dataSrc:""
+                },
+                columns: [
+                    { data: "DNI" },
+                    { data: "Nombres" },
+                    { data: "Apellidos" },
+                    { data: "LicenciaConducir" },
+
+                    {
+                        data: "PropietarioId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Propietarios/Edit/" + data + "'>Actualizar</a>";
+                        }
+                    },
+                    {
+                        data: "PropietarioId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Propietarios/details/" + data + "'>Detalles</a>";
+                        }
+                    },
+                    {
+                        data: "PropietarioId",
+                        render: function (data) {
+                            return "<a class='btn btn-primary' href='/Propietarios/Delete/" + data + "'>Borrar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+        });
+    </script>
+}
+
+

@@ -1,0 +1,156 @@
+﻿@model IEnumerable<_2014214826_ENT.Bus>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Buses</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Bus", "Create")
+</p>
+<table id="tbl_Buses" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>N°Serie Cinturon</th>
+            <th>N°Serie Asiento</th>
+            <th>Nombre de Ensambladora</th>
+            <th>N°Serie Llanta</th>
+            <th>N°Serie Parabrisa</th>
+            <th>DNI del Propietario</th>
+            <th>Tipo de Bus</th>
+            <th>N°Serie Motor</th>
+            <th>N°Serie Chasis</th>
+            <th>Editar</th>
+            <th>Detalles</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Asiento.NumSerieAsiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ensambladora._Ensambladora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Llanta.NumSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Parabrisas.NumSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Propietario.DNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Volante.NumSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSerieMotor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumSerieChasis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoCarro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoBus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asiento.NumSerieAsiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ensambladora._Ensambladora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Llanta.NumSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parabrisas.NumSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Propietario.DNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volante.NumSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSerieMotor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumSerieChasis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoCarro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoBus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CarroId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CarroId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CarroId })
+        </td>
+    </tr>
+}*@
+
+</table>
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+               var table = $("#tbl_Buses")
+                    .DataTable({
+                ajax: {
+                    url: "/api/Buses",
+                    dataSrc:""
+                },
+                columns: [
+                    { data: "Asiento.Cinturon.NumSerieCinturon" },
+                    { data: "Asiento.NumSerieAsiento" },
+                    { data: "Ensambladora._Ensambladora" },
+                    { data: "Llanta.NumSerie" },
+                    { data: "Parabrisas.NumSerie" },
+                    { data: "Propietario.DNI" },
+                    { data: "TipoBus" },
+                    { data: "NumSerieMotor" },
+                    { data: "NumSerieChasis" },
+
+                    {
+                        data: "CarroId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Buses/Edit/" + data + "'>Actualizar</a>";
+                        }
+                    },
+                    {
+                        data: "CarroId",
+                        render: function (data, type, doctor) {
+                            return "<a href='/Buses/details/" + data + "'>Detalles</a>";
+                        }
+                    },
+                    {
+                        data: "CarroId",
+                        render: function (data) {
+                            return "<a class='btn btn-primary' href='/Buses/Delete/" + data + "'>Borrar</a>";
+                        }
+                    },
+
+                ]
+
+            });
+        });
+    </script>
+}
+
+
