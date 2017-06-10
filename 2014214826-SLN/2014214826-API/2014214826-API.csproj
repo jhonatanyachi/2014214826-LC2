@@ -410,6 +410,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\auto2.jpg" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
